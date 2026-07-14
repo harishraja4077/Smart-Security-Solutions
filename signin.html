@@ -39,6 +39,141 @@
       background-color: var(--color-accent);
       color: var(--color-dark);
     }
+    /* ── Forgot Password Modal ── */
+    .fp-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 15, 29, 0.85);
+      backdrop-filter: blur(10px);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .fp-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .fp-modal {
+      background: #0e1526;
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      border-radius: 12px;
+      padding: 40px 36px;
+      width: 100%;
+      max-width: 440px;
+      margin: 0 20px;
+      position: relative;
+      transform: translateY(20px) scale(0.97);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(16, 185, 129, 0.1);
+    }
+    .fp-overlay.open .fp-modal {
+      transform: translateY(0) scale(1);
+    }
+    .fp-modal-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(16, 185, 129, 0.05));
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      margin-bottom: 20px;
+    }
+    .fp-modal h3 {
+      font-family: var(--font-heading);
+      font-size: 22px;
+      color: #ffffff;
+      margin-bottom: 8px;
+    }
+    .fp-modal p {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.55);
+      line-height: 1.6;
+      margin-bottom: 28px;
+    }
+    .fp-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.6);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      line-height: 1;
+      transition: all 0.2s;
+    }
+    .fp-close:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+    }
+    .fp-success {
+      display: none;
+      text-align: center;
+      padding: 10px 0;
+    }
+    .fp-success-icon {
+      font-size: 40px;
+      margin-bottom: 16px;
+    }
+    .fp-success h4 {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      color: var(--color-accent);
+      margin-bottom: 8px;
+    }
+    .fp-success p {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.5);
+      margin-bottom: 20px;
+    }
+    /* ── Back to Home button ── */
+    .back-home-row {
+      margin-top: 20px;
+      text-align: center;
+    }
+    .back-home-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-heading);
+      font-size: 13px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.45);
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 50px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.25s ease;
+      letter-spacing: 0.3px;
+    }
+    .back-home-btn:hover {
+      color: var(--color-accent);
+      border-color: rgba(16, 185, 129, 0.4);
+      background: rgba(16, 185, 129, 0.05);
+      gap: 12px;
+    }
+    .back-home-btn svg {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+      transition: transform 0.25s ease;
+    }
+    .back-home-btn:hover svg {
+      transform: translateX(-3px);
+    }
   </style>
 </head>
 <body class="dark-theme">
@@ -135,20 +270,98 @@
             <button type="submit" class="btn btn-primary" style="width: 100%;">Establish Session</button>
             
             <div class="auth-meta-row">
-              <a href="#" onclick="alert('Password reset link sent to your email.');">Request Token Reset</a>
-              <span style="color: rgba(var(--color-dark-rgb), 0.4);">SLA SECURE</span>
+              <a href="404.html" id="forgot-pw-trigger" onclick="openForgotPassword(event)">Forgot Password?</a>
+              <span style="color: rgba(255,255,255,0.25); font-size: 11px; font-weight: 600; letter-spacing: 0.5px;">🔒 SLA SECURE</span>
             </div>
           </form>
+
+          <!-- Back to Home -->
+          <div class="back-home-row">
+            <a href="index.html" class="back-home-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+              Back to Home
+            </a>
+          </div>
         </div>
 
       </div>
     </div>
   </section>
 
+  <!-- Forgot Password Modal -->
+  <div class="fp-overlay" id="fp-overlay" onclick="closeForgotOnOverlay(event)">
+    <div class="fp-modal" id="fp-modal">
+      <button class="fp-close" onclick="closeForgotPassword()" aria-label="Close">✕</button>
+
+      <!-- Form View -->
+      <div id="fp-form-view">
+        <div class="fp-modal-icon">🔑</div>
+        <h3>Reset Your Password</h3>
+        <p>Enter your registered corporate email address and we'll send you a secure token reset link within minutes.</p>
+
+        <form onsubmit="sendResetLink(event)">
+          <div class="form-group" style="margin-bottom: 24px;">
+            <label for="fp-email" style="color: rgba(255,255,255,0.7);">Corporate Email Address</label>
+            <input type="email" id="fp-email" class="form-control" placeholder="operations@company.com" required
+              style="background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.12); color: #fff;">
+          </div>
+          <button type="submit" class="btn btn-primary" style="width: 100%;">Send Reset Link →</button>
+        </form>
+
+        <p style="margin-top: 20px; text-align: center; font-size: 12px; color: rgba(255,255,255,0.3); margin-bottom: 0;">
+          Remembered your password?
+          <a href="#" onclick="closeForgotPassword()" style="color: var(--color-accent); text-decoration: none;"> Sign in here</a>
+        </p>
+      </div>
+
+      <!-- Success View -->
+      <div class="fp-success" id="fp-success-view">
+        <div class="fp-success-icon">✅</div>
+        <h4>Reset Link Dispatched</h4>
+        <p>A secure token reset link has been sent to your registered email. Check your inbox and follow the instructions.</p>
+        <button class="btn btn-primary" style="width: 100%;" onclick="closeForgotPassword()">Return to Sign In</button>
+      </div>
+    </div>
+  </div>
 
   <script src="js/script.js"></script>
 
-  <!-- Login Role & Form Redirect Script -->
+  <!-- Forgot Password + Login Role & Form Redirect Script -->
+  <script>
+    /* ── Forgot Password Modal Logic ── */
+    function openForgotPassword(e) {
+      e.preventDefault();
+      document.getElementById('fp-overlay').classList.add('open');
+      document.getElementById('fp-form-view').style.display = 'block';
+      document.getElementById('fp-success-view').style.display = 'none';
+      setTimeout(() => document.getElementById('fp-email').focus(), 350);
+    }
+
+    function closeForgotPassword() {
+      document.getElementById('fp-overlay').classList.remove('open');
+    }
+
+    function closeForgotOnOverlay(e) {
+      if (e.target === document.getElementById('fp-overlay')) {
+        closeForgotPassword();
+      }
+    }
+
+    function sendResetLink(e) {
+      e.preventDefault();
+      const email = document.getElementById('fp-email').value;
+      // Simulate async send
+      document.getElementById('fp-form-view').style.display = 'none';
+      document.getElementById('fp-success-view').style.display = 'block';
+    }
+
+    /* Escape key closes modal */
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeForgotPassword();
+    });
+
+  </script>
+
   <script>
     let currentRole = 'user';
 

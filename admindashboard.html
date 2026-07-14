@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Staff Terminal | Stackly Smart Security Solutions</title>
+  <meta name="description" content="Access the Stackly Admin Command Terminal to monitor client installations, system logs, whitelists, and database metrics.">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* Admin Dashboard specific overrides to support sidebar next to panel in 3-color palette */
+    .dash-layout {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 40px;
+      padding: 60px 0;
+    }
+    .dash-sidebar-container {
+      background-color: var(--color-dark);
+      border: 1px solid rgba(var(--color-accent-rgb), 0.15);
+      border-radius: 8px;
+      padding: 30px 20px;
+      color: var(--color-white);
+      height: fit-content;
+    }
+    .dash-profile {
+      text-align: center;
+      padding-bottom: 24px;
+      border-bottom: 1px solid rgba(var(--color-white-rgb), 0.08);
+      margin-bottom: 24px;
+    }
+    .dash-profile-img {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      border: 2px solid var(--color-accent);
+      margin-bottom: 12px;
+      object-fit: cover;
+    }
+    .dash-profile h4 {
+      font-size: 16px;
+      color: var(--color-white);
+    }
+    .dash-profile p {
+      font-size: 12px;
+      color: var(--color-accent);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 600;
+      margin-top: 4px;
+    }
+    .dash-nav-menu {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .dash-nav-btn {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      border-radius: 4px;
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 14px;
+      color: rgba(var(--color-white-rgb), 0.7);
+      cursor: pointer;
+      transition: var(--transition-fast);
+    }
+    .dash-nav-btn:hover, .dash-nav-btn.active {
+      background-color: rgba(var(--color-accent-rgb), 0.1);
+      color: var(--color-accent);
+    }
+    .db-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      font-size: 14px;
+    }
+    .db-table th, .db-table td {
+      padding: 14px 16px;
+      text-align: left;
+      border-bottom: 1px solid rgba(var(--color-white-rgb), 0.08);
+    }
+    .db-table th {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      color: var(--color-accent);
+      background-color: rgba(var(--color-accent-rgb), 0.05);
+    }
+    .db-table tr:hover td {
+      background-color: rgba(var(--color-white-rgb), 0.02);
+    }
+    .badge-status {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 50px;
+      text-transform: uppercase;
+    }
+    .badge-active {
+      background-color: rgba(16, 185, 129, 0.15);
+      color: var(--color-accent);
+    }
+    .badge-pending {
+      background-color: rgba(255, 255, 255, 0.1);
+      color: var(--color-white);
+    }
+    @media (max-width: 900px) {
+      .dash-layout { grid-template-columns: 1fr; }
+      .db-table-wrapper { overflow-x: auto; }
+    }
+    /* Session user chip in header */
+    .user-session-chip {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background-color: rgba(var(--color-accent-rgb), 0.08);
+      border: 1px solid rgba(var(--color-accent-rgb), 0.25);
+      border-radius: 50px;
+      padding: 6px 14px 6px 8px;
+      cursor: default;
+      transition: var(--transition-fast);
+    }
+    .user-session-chip:hover {
+      background-color: rgba(var(--color-accent-rgb), 0.14);
+      border-color: var(--color-accent);
+    }
+    .user-chip-avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--color-accent), #059669);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 12px;
+      color: var(--color-dark);
+      flex-shrink: 0;
+      text-transform: uppercase;
+    }
+    .user-chip-email {
+      font-family: var(--font-heading);
+      font-size: 13px;
+      font-weight: 600;
+      color: rgba(var(--color-white-rgb), 0.85);
+      max-width: 160px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .dash-profile-email-badge {
+      display: inline-block;
+      background-color: rgba(var(--color-accent-rgb), 0.1);
+      border: 1px solid rgba(var(--color-accent-rgb), 0.25);
+      border-radius: 50px;
+      padding: 4px 12px;
+      font-size: 11px;
+      font-weight: 500;
+      color: rgba(var(--color-white-rgb), 0.7);
+      margin-top: 8px;
+      letter-spacing: 0.3px;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .dash-tab-content {
+      display: none;
+    }
+    .dash-tab-content.active {
+      display: block;
+    }
+  </style>
+</head>
+<body class="dark-theme">
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container header-container">
+      <a href="index.html" class="logo">
+        <img src="images/logo.webp" alt="Stackly Logo">
+      </a>
+
+      <!-- Navigation -->
+      <nav class="nav-menu" id="nav-menu">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="service.html" class="nav-link">Services</a>
+        <a href="blog.html" class="nav-link">Blog</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+
+      <div class="header-actions">
+        <!-- Session User Chip -->
+        <div class="user-session-chip" id="header-user-chip" title="Signed in as" style="display:none;">
+          <div class="user-chip-avatar" id="header-user-initial">A</div>
+          <span class="user-chip-email" id="header-user-email"></span>
+        </div>
+        <a href="signin.html" class="btn btn-primary" onclick="localStorage.removeItem('stackly_user_email'); localStorage.removeItem('stackly_user_role');">Sign Out</a>
+        <div class="mobile-toggle" id="mobile-toggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Section 1: Subpage Hero -->
+  <section class="subpage-hero">
+    <div class="cyber-grid"></div>
+    <div class="container">
+      <h1>Staff Admin Terminal</h1>
+      <div class="breadcrumbs">
+        <a href="index.html">Home</a>
+        <span class="separator">//</span>
+        <span class="current">Admin Terminal</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: Sidebar and Overview Panel -->
+  <section class="container">
+    <div class="dash-layout">
+      
+      <!-- Dashboard Sidebar -->
+      <div class="dash-sidebar-container reveal-left">
+        <div class="dash-profile">
+          <div class="user-chip-avatar" id="sidebar-user-initial" style="width:64px;height:64px;font-size:22px;margin:0 auto 12px;">A</div>
+          <h4 id="sidebar-user-name">Loading...</h4>
+          <p style="color: rgba(var(--color-white-rgb),0.5); font-size:11px; text-transform:uppercase; letter-spacing:1px;">Terminal Admin</p>
+          <span class="dash-profile-email-badge" id="sidebar-user-email">—</span>
+        </div>
+        <div class="dash-nav-menu">
+          <div class="dash-nav-btn active" onclick="switchTab('health')">🖥 System Health</div>
+          <div class="dash-nav-btn" onclick="switchTab('clients')">👥 Client Database</div>
+          <div class="dash-nav-btn" onclick="switchTab('telemetry')">🪵 Telemetry Logs</div>
+          <div class="dash-nav-btn" onclick="switchTab('overrides')">⚙ Cluster Overrides</div>
+          <div class="dash-nav-btn" onclick="switchTab('tickets')">🎫 Support Tickets</div>
+          <a href="signin.html" class="dash-nav-btn" style="margin-top: 24px; color: var(--color-accent);" onclick="localStorage.removeItem('stackly_user_email'); localStorage.removeItem('stackly_user_role');">⎋ Close Command Session</a>
+        </div>
+      </div>
+
+      <!-- Main Panel area containing various sections -->
+      <div class="dash-main-area reveal-right">
+        
+        <!-- SECTION 1: System Health (Overview) -->
+        <div id="tab-health" class="dash-tab-content active">
+          <div class="dashboard-grid-3" style="margin-bottom: 30px;">
+            <div class="dashboard-stat-card">
+              <div class="dashboard-stat-icon">👥</div>
+              <div class="dashboard-stat-info">
+                <h4>Active Subscriptions</h4>
+                <div class="dashboard-stat-value">1,420</div>
+              </div>
+            </div>
+            <div class="dashboard-stat-card">
+              <div class="dashboard-stat-icon">🖥</div>
+              <div class="dashboard-stat-info">
+                <h4>Server CPU Load</h4>
+                <div class="dashboard-stat-value" style="color: var(--color-accent);">14.2%</div>
+              </div>
+            </div>
+            <div class="dashboard-stat-card">
+              <div class="dashboard-stat-icon">⚠️</div>
+              <div class="dashboard-stat-info">
+                <h4>Active Warnings</h4>
+                <div class="dashboard-stat-value">0</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="dashboard-panel" style="margin-bottom: 30px;">
+            <h3 class="panel-title">Server Operations Logs</h3>
+            <div class="activity-list">
+              <div class="activity-item">
+                <div class="activity-left">
+                  <span class="activity-desc">Vanguard Central database backup whitelisting completed</span>
+                  <span class="activity-time">Today, 16:50:00 // Node: NY-HQ-01</span>
+                </div>
+                <span class="activity-status">DATABASE SUCCESS</span>
+              </div>
+              <div class="activity-item">
+                <div class="activity-left">
+                  <span class="activity-desc">Client registration audit whitelisted reference ID STK-990-2026</span>
+                  <span class="activity-time">Today, 16:30:15 // Auditor ID: #302</span>
+                </div>
+                <span class="activity-status">AUDIT OK</span>
+              </div>
+              <div class="activity-item" style="border-left-color: var(--color-accent);">
+                <div class="activity-left">
+                  <span class="activity-desc">Global security firmware patch v4.9.2 deployed successfully</span>
+                  <span class="activity-time">Today, 15:00:00 // All nodes whitelisted</span>
+                </div>
+                <span class="activity-status" style="color: var(--color-white);">PATCH DEPLOYED</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="dashboard-panel">
+            <h3 class="panel-title">Active Server Cluster Uptime</h3>
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
+              <div>
+                <h4 style="font-size: 20px; color: var(--color-accent);">Node Cluster: Vanguard-01 // NY</h4>
+                <p style="font-size: 14px; color: rgba(var(--color-white-rgb), 0.6); margin-top: 4px;">Uptime: 345 Days 12 Hours // Network Link: 10 Gbps Duplex // Storage Capacity: 1.2 PB / 2.0 PB</p>
+              </div>
+              <div class="btn btn-outline" onclick="alert('Cluster Node Vanguard-01 initiated reboot sequence...')">Server Reboot</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 2: Client Database -->
+        <div id="tab-clients" class="dash-tab-content">
+          <div class="dashboard-panel" style="margin-bottom: 30px;">
+            <h3 class="panel-title">👥 Client Database</h3>
+            <p style="color: rgba(var(--color-white-rgb), 0.6); font-size: 14px; margin-bottom: 20px; line-height: 1.5;">Manage active subscribers profiles, contract tiers, and hardware system status links.</p>
+            
+            <div class="db-table-wrapper" style="margin-bottom: 20px;">
+              <table class="db-table">
+                <thead>
+                  <tr>
+                    <th>Client Name</th>
+                    <th>Contract Reference ID</th>
+                    <th>Plan Tier</th>
+                    <th>System Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Apex Logistics</td>
+                    <td>STK-440-2024</td>
+                    <td>Enterprise Shield</td>
+                    <td><span class="badge-status badge-active">Active</span></td>
+                    <td><button class="btn btn-outline" style="padding: 6px 12px; font-size: 12px;" onclick="alert('Viewing Apex System parameters...')">Inspect</button></td>
+                  </tr>
+                  <tr>
+                    <td>Innotech Corp</td>
+                    <td>STK-112-2025</td>
+                    <td>Enterprise Shield</td>
+                    <td><span class="badge-status badge-active">Active</span></td>
+                    <td><button class="btn btn-outline" style="padding: 6px 12px; font-size: 12px;" onclick="alert('Viewing Innotech parameters...')">Inspect</button></td>
+                  </tr>
+                  <tr>
+                    <td>Arthur Chen</td>
+                    <td>STK-990-2026</td>
+                    <td>Business Safe</td>
+                    <td><span class="badge-status badge-pending">Vetting</span></td>
+                    <td><button class="btn btn-primary" style="padding: 6px 12px; font-size: 12px; color: var(--color-dark);" onclick="alert('Subscriber STK-990-2026 whitelisted successfully!');">Approve</button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <button class="btn btn-primary" onclick="alert('Opening Add Subscriber Form...')">Add New Subscriber Client</button>
+          </div>
+        </div>
+
+        <!-- SECTION 3: Telemetry Logs -->
+        <div id="tab-telemetry" class="dash-tab-content">
+          <div class="dashboard-panel" style="margin-bottom: 30px;">
+            <h3 class="panel-title">🪵 Telemetry Logs</h3>
+            <p style="color: rgba(var(--color-white-rgb), 0.6); font-size: 14px; margin-bottom: 20px; line-height: 1.5;">Realtime telemetry package telemetry routing and node response logs. Diagnostic status stream of connected cameras and sensors.</p>
+            
+            <div class="activity-list" style="margin-bottom: 20px;">
+              <div class="activity-item">
+                <div class="activity-left">
+                  <span class="activity-desc">[Telemetry] Node TX-ELP-02 ping packet received</span>
+                  <span class="activity-time">Just now // Latency: 12ms // Signals: 100%</span>
+                </div>
+                <span class="activity-status" style="background-color: rgba(16,185,129,0.1); color: var(--color-accent);">ONLINE</span>
+              </div>
+              <div class="activity-item">
+                <div class="activity-left">
+                  <span class="activity-desc">[Firmware] Node CA-SF-09 whitelisted package handshake</span>
+                  <span class="activity-time">3 mins ago // Build: STK-v4.9.2</span>
+                </div>
+                <span class="activity-status" style="background-color: rgba(16,185,129,0.1); color: var(--color-accent);">SYNCED</span>
+              </div>
+              <div class="activity-item">
+                <div class="activity-left">
+                  <span class="activity-desc">[Diagnostic] Camera Cam-02 (Server Room) thermal sensor normal</span>
+                  <span class="activity-time">8 mins ago // Temp: 32°C // Status: OK</span>
+                </div>
+                <span class="activity-status" style="background-color: rgba(16,185,129,0.1); color: var(--color-accent);">NORMAL</span>
+              </div>
+              <div class="activity-item" style="border-left-color: #f59e0b;">
+                <div class="activity-left">
+                  <span class="activity-desc">[Latency Warning] Node FL-MIA-04 packet retry timeout</span>
+                  <span class="activity-time">15 mins ago // Latency: 245ms // Retries: 2/5</span>
+                </div>
+                <span class="activity-status" style="background-color: rgba(245,158,11,0.1); color: #f59e0b;">LATENCY</span>
+              </div>
+            </div>
+
+            <button class="btn btn-outline" onclick="alert('Exporting full telemetry logs to CSV...')">Export Logs Data</button>
+          </div>
+        </div>
+
+        <!-- SECTION 4: Cluster Overrides -->
+        <div id="tab-overrides" class="dash-tab-content">
+          <div class="dashboard-panel" style="margin-bottom: 30px;">
+            <h3 class="panel-title">⚙ Cluster Overrides</h3>
+            <p style="color: rgba(var(--color-white-rgb), 0.6); font-size: 14px; margin-bottom: 20px; line-height: 1.5;">Apply node parameter policy overrides or override active security configurations manually.</p>
+            
+            <form onsubmit="event.preventDefault(); alert('Global thresholds updated across cluster nodes.');" style="margin-bottom: 25px;">
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="p-firm">Cluster Firmware Deployment Mode</label>
+                  <select id="p-firm" class="form-control" style="background-color: var(--color-dark); color: var(--color-white); width: 100%;">
+                    <option value="auto" selected>Automated Deploy (Immediate updates)</option>
+                    <option value="stage">Staged Deploy (Requires admin signoff)</option>
+                    <option value="manual">Manual Deploy (Custom package upload)</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="p-aud">Global Telemetry Log Retention</label>
+                  <select id="p-aud" class="form-control" style="background-color: var(--color-dark); color: var(--color-white); width: 100%;">
+                    <option value="30">30 Days (Standard SLA)</option>
+                    <option value="90" selected>90 Days (Enterprise SLA)</option>
+                    <option value="365">365 Days (Regulatory compliance)</option>
+                  </select>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary" style="margin-top: 20px;">Deploy Cluster Policies</button>
+            </form>
+
+            <div style="background-color: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.25); border-radius: 6px; padding: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+              <div>
+                <h4 style="font-size: 15px; color: var(--color-white);">Intrusion Alert Level Block</h4>
+                <p style="font-size: 12px; color: rgba(var(--color-white-rgb), 0.5); margin-top: 4px;">Escalate global network threat alerts immediately to Level Red.</p>
+              </div>
+              <button class="btn btn-primary" style="background-color: #ef4444; border-color: #ef4444; color: var(--color-white);" onclick="alert('⚠️ Warning! Network level overridden to Level Red alert. Dispatches triggered.')">Escalate Alert Level</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 5: Support Tickets -->
+        <div id="tab-tickets" class="dash-tab-content">
+          <div class="dashboard-panel" style="margin-bottom: 30px;">
+            <h3 class="panel-title">🎫 Support Tickets</h3>
+            <p style="color: rgba(var(--color-white-rgb), 0.6); font-size: 14px; margin-bottom: 20px; line-height: 1.5;">Incoming support dispatches queries and camera repair ticket requests from subscriber clients.</p>
+            
+            <div class="db-table-wrapper">
+              <table class="db-table">
+                <thead>
+                  <tr>
+                    <th>Ticket ID</th>
+                    <th>Subscriber Client</th>
+                    <th>Issue Description</th>
+                    <th>Priority</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>TCK-402</td>
+                    <td>Apex Logistics</td>
+                    <td>Cam 04 back parking focus calibration out</td>
+                    <td><span class="badge-status" style="background-color: rgba(245,158,11,0.15); color: #f59e0b;">Medium</span></td>
+                    <td><button class="btn btn-primary" style="padding: 6px 12px; font-size: 12px; color: var(--color-dark);" onclick="alert('Apex TCK-402 assigned to Hardware Dispatch Squad!')">Assign Squad</button></td>
+                  </tr>
+                  <tr>
+                    <td>TCK-398</td>
+                    <td>Innotech Corp</td>
+                    <td>Server Room biometric gate backup battery status warning</td>
+                    <td><span class="badge-status" style="background-color: rgba(239,68,68,0.15); color: #ef4444;">High</span></td>
+                    <td><button class="btn btn-primary" style="padding: 6px 12px; font-size: 12px; color: var(--color-dark);" onclick="alert('Innotech TCK-398 assigned to Bio-Gate Specialists!')">Assign Squad</button></td>
+                  </tr>
+                  <tr>
+                    <td>TCK-311</td>
+                    <td>Arthur Chen</td>
+                    <td>Mobile app setup walkthrough notification error</td>
+                    <td><span class="badge-status" style="background-color: rgba(255,255,255,0.1); color: var(--color-white);">Low</span></td>
+                    <td><button class="btn btn-outline" style="padding: 6px 12px; font-size: 12px;" onclick="alert('Ticket TCK-311 marked as resolved.')">Resolve</button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Section 8: Tech override hotlines CTA -->
+  <section class="live-feed-section">
+    <div class="container text-center reveal-up">
+      <h2 style="font-size: 32px; color: var(--color-white); margin-bottom: 16px; font-family: var(--font-heading);">Global infrastructure crisis?</h2>
+      <p style="color: rgba(var(--color-white-rgb), 0.75); max-width: 600px; margin: 0 auto 30px;">In the event of a cluster-wide service degradation or physical facility breach, initiate the emergency hardware override protocols.</p>
+      <a href="tel:+18005559999" class="btn btn-primary">⚠️ INITIATE BACKDOOR OVERRIDE</a>
+    </div>
+  </section>
+
+  <!-- Floating Scroll Progress Button -->
+  <div class="scroll-progress" id="scroll-progress">
+    <svg class="progress-circle-svg" viewBox="0 0 44 44">
+      <circle class="progress-circle-path" id="progress-path" cx="22" cy="22" r="20"></circle>
+    </svg>
+    <span class="scroll-progress-icon">↑</span>
+  </div>
+
+  <script src="js/script.js"></script>
+
+  <script>
+    function switchTab(tabId) {
+      // Hide all tabs content
+      const contents = document.querySelectorAll('.dash-tab-content');
+      contents.forEach(content => content.classList.remove('active'));
+
+      // Show target tab content
+      const targetContent = document.getElementById('tab-' + tabId);
+      if (targetContent) {
+        targetContent.classList.add('active');
+      }
+
+      // Remove active class from all nav buttons
+      const buttons = document.querySelectorAll('.dash-nav-btn');
+      buttons.forEach(btn => btn.classList.remove('active'));
+
+      // Find the button with matching onclick parameter and make it active
+      const clickedBtn = Array.from(buttons).find(btn => btn.getAttribute('onclick')?.includes(tabId));
+      if (clickedBtn) {
+        clickedBtn.classList.add('active');
+      }
+    }
+  </script>
+
+  <!-- Dashboard Session Loader -->
+  <script>
+    (function() {
+      const email = localStorage.getItem('stackly_user_email') || '';
+      if (!email) return;
+
+      const localPart  = email.split('@')[0];
+      const initial    = localPart.charAt(0).toUpperCase();
+      const displayName = localPart
+        .replace(/[._-]+/g, ' ')
+        .replace(/\b\w/g, c => c.toUpperCase());
+
+      // Header chip
+      const chip = document.getElementById('header-user-chip');
+      if (chip) {
+        chip.style.display = 'flex';
+        document.getElementById('header-user-initial').textContent = initial;
+        document.getElementById('header-user-email').textContent   = email;
+      }
+
+      // Sidebar profile
+      const sidebarName  = document.getElementById('sidebar-user-name');
+      const sidebarEmail = document.getElementById('sidebar-user-email');
+      const sidebarInit  = document.getElementById('sidebar-user-initial');
+      if (sidebarName)  sidebarName.textContent  = displayName;
+      if (sidebarEmail) sidebarEmail.textContent = email;
+      if (sidebarInit)  sidebarInit.textContent  = initial;
+    })();
+  </script>
+</body>
+</html>

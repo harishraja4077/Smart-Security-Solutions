@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Get In Touch | Stackly Smart Security Solutions</title>
+  <meta name="description" content="Contact Stackly Security. Speak with our security coordinators, request a physical vulnerabilities audit, or reach our emergency command dispatches.">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* Styling for the custom SVG security operations map */
+    .map-svg-container {
+      width: 100%;
+      height: 100%;
+      background-color: var(--color-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .map-telemetry {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-family: monospace;
+      font-size: 11px;
+      color: rgba(var(--color-accent-rgb), 0.7);
+      pointer-events: none;
+    }
+    .map-marker {
+      cursor: pointer;
+      transition: var(--transition-fast);
+    }
+    .map-marker:hover {
+      fill: var(--color-white);
+      filter: drop-shadow(0 0 10px var(--color-accent));
+    }
+  </style>
+</head>
+<body class="dark-theme">
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container header-container">
+      <a href="index.html" class="logo">
+        <img src="images/logo.webp" alt="Stackly Logo">
+      </a>
+
+      <!-- Navigation -->
+      <nav class="nav-menu" id="nav-menu">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="service.html" class="nav-link">Services</a>
+        <a href="blog.html" class="nav-link">Blog</a>
+        <a href="contact.html" class="nav-link active">Contact</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="signin.html" class="btn btn-primary">Sign In</a>
+        <div class="mobile-toggle" id="mobile-toggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Section 1: Subpage Hero -->
+  <section class="subpage-hero">
+    <div class="cyber-grid"></div>
+    <div class="container">
+      <h1>Contact Us</h1>
+      <div class="breadcrumbs">
+        <a href="index.html">Home</a>
+        <span class="separator">//</span>
+        <span class="current">Contact Us</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: Contact Info Cards -->
+  <section class="container" style="padding-top: 80px;">
+    <div class="contact-info-cards" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px;">
+      <!-- Card 1 -->
+      <div class="contact-info-card reveal-up">
+        <div class="contact-icon-wrapper">📍</div>
+        <div class="contact-info-content">
+          <h4>Office Address</h4>
+          <p>MMR Complex, Chinna Thirupathi, near Chinna Muniyappan Kovil, Salem, Tamil Nadu 636008</p>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="contact-info-card reveal-up" style="transition-delay: 0.1s;">
+        <div class="contact-icon-wrapper">✉</div>
+        <div class="contact-info-content">
+          <h4>Email Enquiries</h4>
+          <p>info@thestackly.com<br>thestackly@gmail.com</p>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="contact-info-card reveal-up" style="transition-delay: 0.2s;">
+        <div class="contact-icon-wrapper">📞</div>
+        <div class="contact-info-content">
+          <h4>Phone Support</h4>
+          <p>Main: +91 70107 92745<br>Support: +1 (800) 555-9999</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Interactive Contact Form -->
+  <section class="container">
+    <div class="contact-grid">
+      <div class="contact-form-box reveal-left">
+        <h2 class="form-title">Send a message</h2>
+        <form onsubmit="event.preventDefault(); alert('Message submitted! Our security architects will contact you within 2 hours.'); this.reset();">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="c-name">Your Name</label>
+              <input type="text" id="c-name" class="form-control" placeholder="John Doe" required>
+            </div>
+            <div class="form-group">
+              <label for="c-email">Your Email</label>
+              <input type="email" id="c-email" class="form-control" placeholder="john@company.com" required>
+            </div>
+            <div class="form-group">
+              <label for="c-phone">Phone Number</label>
+              <input type="tel" id="c-phone" class="form-control" placeholder="+1 (555) 000-0000" required>
+            </div>
+            <div class="form-group">
+              <label for="c-domain">Property Type</label>
+              <select id="c-domain" class="form-control" style="background-color: var(--color-dark); color: var(--color-white);" required>
+                <option value="residential">Residential Home</option>
+                <option value="commercial">Commercial Building</option>
+                <option value="industrial">Industrial Site</option>
+                <option value="other">Other / Custom</option>
+              </select>
+            </div>
+            <div class="form-group form-full">
+              <label for="c-msg">Brief vulnerability outline / requirements</label>
+              <textarea id="c-msg" class="form-control" placeholder="Outline entry points, requirements, or timeline..." required></textarea>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">Transmit Message</button>
+        </form>
+      </div>
+
+      <div class="contact-form-box reveal-right" style="background-color: var(--color-dark); color: var(--color-white); display: flex; flex-direction: column; justify-content: center; border-color: rgba(var(--color-accent-rgb), 0.2);">
+        <h2 style="color: var(--color-white); font-size: 24px; margin-bottom: 20px;">Standard response guarantees</h2>
+        <p style="color: rgba(var(--color-white-rgb), 0.7); font-size: 15px; margin-bottom: 24px; line-height: 1.7;">Stackly maintains a strict customer communications service-level-agreement (SLA). All digital requests receive direct reviews by certified technicians.</p>
+        
+        <ul style="display: flex; flex-direction: column; gap: 16px;">
+          <li style="display: flex; gap: 12px; font-size: 15px;"><span style="color: var(--color-accent);">✓</span> 2-Hour business email review response</li>
+          <li style="display: flex; gap: 12px; font-size: 15px;"><span style="color: var(--color-accent);">✓</span> Vetted certified installer technicians</li>
+          <li style="display: flex; gap: 12px; font-size: 15px;"><span style="color: var(--color-accent);">✓</span> Free site-survey blueprints design estimate</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: Stylized SVG Map -->
+  <section class="map-section container">
+    <div class="services-header reveal-up" style="margin-bottom: 40px;">
+      <span class="section-tag">Global Coordinates</span>
+      <h2 class="section-title">Our offices and command grids</h2>
+    </div>
+
+    <div class="map-wrapper reveal-up">
+      <div class="map-svg-container">
+        <div class="map-telemetry">
+          GRID.LOC // 40.7128° N, 74.0060° W<br>
+          NODES: NY, LA, LN, TO<br>
+          ENCRYPTION: ACTIVE
+        </div>
+        <!-- Stylized Map SVG showing custom map with 3 colors -->
+        <svg width="100%" height="100%" viewBox="0 0 800 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Background grids and nodes -->
+          <path d="M50 80 Q 200 40 380 90 T 700 80" stroke="rgba(16, 185, 129, 0.1)" stroke-width="1.5" stroke-dasharray="5,5"/>
+          <path d="M100 280 Q 250 200 400 290 T 750 280" stroke="rgba(16, 185, 129, 0.1)" stroke-width="1.5" stroke-dasharray="5,5"/>
+          
+          <!-- Continent Outlines represented with simple lines -->
+          <circle cx="200" cy="150" r="100" stroke="rgba(255, 255, 255, 0.05)" stroke-width="2"/>
+          <circle cx="480" cy="220" r="80" stroke="rgba(255, 255, 255, 0.05)" stroke-width="2"/>
+          <circle cx="650" cy="120" r="60" stroke="rgba(255, 255, 255, 0.05)" stroke-width="2"/>
+          
+          <!-- HQ Marker (NY) -->
+          <g class="map-marker" onclick="alert('HQ coordinates: 104 Security Plaza, NY')">
+            <circle cx="220" cy="120" r="20" fill="rgba(16, 185, 129, 0.2)" />
+            <circle cx="220" cy="120" r="8" fill="var(--color-accent)" />
+            <line x1="220" y1="120" x2="220" y2="90" stroke="var(--color-accent)" stroke-width="1.5" />
+            <text x="235" y="115" fill="var(--color-white)" font-family="Space Grotesk" font-size="12" font-weight="bold">NY HEADQUARTERS</text>
+          </g>
+
+          <!-- Node 2 (LA) -->
+          <g class="map-marker" onclick="alert('Command Center: Los Angeles Hub')">
+            <circle cx="120" cy="180" r="12" fill="rgba(16, 185, 129, 0.15)" />
+            <circle cx="120" cy="180" r="5" fill="var(--color-accent)" />
+            <text x="135" y="185" fill="rgba(255, 255, 255, 0.7)" font-family="Space Grotesk" font-size="10">LA Node</text>
+          </g>
+
+          <!-- Node 3 (London) -->
+          <g class="map-marker" onclick="alert('Command Center: London Hub')">
+            <circle cx="450" cy="110" r="12" fill="rgba(16, 185, 129, 0.15)" />
+            <circle cx="450" cy="110" r="5" fill="var(--color-accent)" />
+            <text x="465" y="115" fill="rgba(255, 255, 255, 0.7)" font-family="Space Grotesk" font-size="10">London Node</text>
+          </g>
+
+          <!-- Node 4 (Tokyo) -->
+          <g class="map-marker" onclick="alert('Command Center: Tokyo Hub')">
+            <circle cx="680" cy="160" r="12" fill="rgba(16, 185, 129, 0.15)" />
+            <circle cx="680" cy="160" r="5" fill="var(--color-accent)" />
+            <text x="695" y="165" fill="rgba(255, 255, 255, 0.7)" font-family="Space Grotesk" font-size="10">Tokyo Node</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: Emergency Hotline Center -->
+  <section class="live-feed-section">
+    <div class="container text-center reveal-up">
+      <div style="display: inline-flex; align-items: center; gap: 10px; background-color: rgba(var(--color-accent-rgb), 0.1); border: 1px solid rgba(var(--color-accent-rgb), 0.3); padding: 8px 16px; border-radius: 50px; color: var(--color-accent); font-family: var(--font-heading); font-weight: bold; font-size: 13px; margin-bottom: 24px; text-transform: uppercase;">
+        <span class="hero-tag-pulse" style="background-color: var(--color-accent);"></span>
+        Active Client Dispatch Line
+      </div>
+      <h2 style="font-size: 40px; color: var(--color-white); margin-bottom: 20px; font-family: var(--font-heading);">Emergency Command Center</h2>
+      <p style="color: rgba(var(--color-white-rgb), 0.7); max-width: 600px; margin: 0 auto 40px; font-size: 16px;">If you are an active subscriber encountering an active perimeter hazard or hardware emergency, call the direct terminal hotline below.</p>
+      <a href="tel:+18005559999" class="btn btn-primary" style="font-size: 20px; padding: 18px 36px;">🚨 CALL +1 (800) 555-9999</a>
+    </div>
+  </section>
+
+  <!-- Section 6: FAQ Accordion -->
+  <section class="faq-section">
+    <div class="container">
+      <div class="services-header reveal-up">
+        <span class="section-tag">General Inquiries</span>
+        <h2 class="section-title">Common communication guidelines</h2>
+      </div>
+
+      <div class="faq-accordion reveal-up" style="max-width: 800px; margin: 0 auto;">
+        <div class="faq-item">
+          <div class="faq-question">
+            Do you charge for residential site-survey assessments?
+            <span class="faq-icon"></span>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              No. All site examinations, perimeter vulnerability reports, and hardware layouts are designed free of charge. We provide the full quote report for you to evaluate without initial fees.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            Can we adjust our alarm dispatches after setup?
+            <span class="faq-icon"></span>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Yes, monitoring modes (silent alerts, speaker triggers, direct dispatch, or private security checkouts) can be configured directly inside your Stackly User Dashboard at any time.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 7: Final CTA Banner -->
+  <section class="cta-banner">
+    <div class="container cta-flex">
+      <div class="cta-left">
+        <h2>Establish secure protection boundaries today</h2>
+        <p>Talk with a certification engineer to map out your perimeter vulnerabilities.</p>
+      </div>
+      <div class="cta-right">
+        <a href="contact.html" class="btn btn-dark">Get Connected</a>
+        <a href="tel:+18005557327" class="btn btn-outline" style="border-color: var(--color-dark); color: var(--color-dark);">1-800-SECURE</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-top">
+      <div class="footer-column footer-about">
+        <a href="index.html" class="logo" style="margin-bottom: 20px;">
+          <img src="images/logo.webp" alt="Stackly Logo">
+        </a>
+        <p>Premium military-grade protection systems, combining high-resolution camera hardware with automated threat-analysis software.</p>
+        <div class="social-links">
+          <a href="404.html" class="social-link">𝕏</a>
+          <a href="404.html" class="social-link">f</a>
+          <a href="404.html" class="social-link">in</a>
+          <a href="404.html" class="social-link">yt</a>
+        </div>
+      </div>
+
+      <div class="footer-column footer-quick-links">
+        <h3>Quick Links</h3>
+        <ul class="quick-links-list">
+          <li class="quick-link-item" style="animation-delay: 0s;"><a href="index.html" class="quick-link"><span class="quick-link-arrow">→</span> Home</a></li>
+          <li class="quick-link-item" style="animation-delay: 0.05s;"><a href="about.html" class="quick-link"><span class="quick-link-arrow">→</span> About Us</a></li>
+          <li class="quick-link-item" style="animation-delay: 0.1s;"><a href="service.html" class="quick-link"><span class="quick-link-arrow">→</span> Services</a></li>
+          <li class="quick-link-item" style="animation-delay: 0.15s;"><a href="blog.html" class="quick-link"><span class="quick-link-arrow">→</span> Blog</a></li>
+          <li class="quick-link-item" style="animation-delay: 0.2s;"><a href="contact.html" class="quick-link"><span class="quick-link-arrow">→</span> Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h3>Contact Us</h3>
+        <div class="footer-contact-list">
+          <div class="footer-contact-item">
+            <span class="icon">📍</span>
+            <span>MMR Complex, Chinna Thirupathi, near Chinna Muniyappan Kovil, Salem,<br> Tamil Nadu 636008</span>
+          </div>
+          <div class="footer-contact-item">
+            <span class="icon">✉</span>
+            <span>info@thestackly.com</span>
+          </div>
+          <div class="footer-contact-item">
+            <span class="icon">📞</span>
+            <span>+91 70107 92745</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-column">
+        <h3>Our Newsletter</h3>
+        <p class="footer-newsletter-desc">Subscribe to receive regular alerts, product releases, and security safety logs.</p>
+        <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Subscribed successfully!');">
+          <input type="email" placeholder="Your corporate email..." required>
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <div>&copy; 2026 Stackly Security Solutions. All rights reserved.</div>
+      <div class="footer-links">
+        <a href="404.html" class="footer-link">Privacy policy</a>
+        <a href="404.html" class="footer-link">Terms of service</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating Scroll Progress Button -->
+  <div class="scroll-progress" id="scroll-progress">
+    <svg class="progress-circle-svg" viewBox="0 0 44 44">
+      <circle class="progress-circle-path" id="progress-path" cx="22" cy="22" r="20"></circle>
+    </svg>
+    <span class="scroll-progress-icon">↑</span>
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register Account | Stackly Smart Security Solutions</title>
+  <meta name="description" content="Register your Stackly security client account. Manage active installations, request camera maintenance, and audit sensor histories.">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* Styling for the role selector toggle matching our 3-color palette */
+    .role-toggle-container {
+      display: flex;
+      background-color: #f8fafd;
+      border: 1px solid rgba(var(--color-dark-rgb), 0.1);
+      border-radius: 4px;
+      padding: 4px;
+      margin-bottom: 24px;
+    }
+    .dark-theme .role-toggle-container {
+      background-color: var(--color-dark);
+      border-color: rgba(var(--color-accent-rgb), 0.2);
+    }
+    .role-btn {
+      flex: 1;
+      padding: 10px;
+      text-align: center;
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: var(--transition-fast);
+      color: rgba(var(--color-dark-rgb), 0.6);
+    }
+    .dark-theme .role-btn {
+      color: rgba(var(--color-white-rgb), 0.6);
+    }
+    .role-btn.active {
+      background-color: var(--color-accent);
+      color: var(--color-dark);
+    }
+  </style>
+</head>
+<body class="dark-theme">
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container header-container">
+      <a href="index.html" class="logo">
+        <img src="images/logo.webp" alt="Stackly Logo">
+      </a>
+
+      <!-- Navigation -->
+      <nav class="nav-menu" id="nav-menu">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="service.html" class="nav-link">Services</a>
+        <a href="blog.html" class="nav-link">Blog</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="signin.html" class="btn btn-primary">Sign In</a>
+        <div class="mobile-toggle" id="mobile-toggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Section 1: Subpage Hero -->
+  <section class="subpage-hero">
+    <div class="cyber-grid"></div>
+    <div class="container">
+      <h1>Register Account</h1>
+      <div class="breadcrumbs">
+        <a href="index.html">Home</a>
+        <span class="separator">//</span>
+        <span class="current">Sign Up</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: Main Signup Form -->
+  <section class="auth-page-wrapper">
+    <div class="container">
+      <div class="auth-container reveal-up">
+        
+        <!-- Left Graphic Side -->
+        <div class="auth-graphic-side">
+          <div class="cyber-grid" style="opacity: 0.2;"></div>
+          <div class="viewfinder-overlay">
+            <div class="vf-corner vf-tl" style="top: 20px; left: 20px;"></div>
+            <div class="vf-corner vf-tr" style="top: 20px; right: 20px;"></div>
+            <div class="vf-corner vf-bl" style="bottom: 20px; left: 20px;"></div>
+            <div class="vf-corner vf-br" style="bottom: 20px; right: 20px;"></div>
+            <div class="vf-rec" style="top: 30px; left: 30px;"><span class="vf-dot"></span>SYS.SECURE</div>
+          </div>
+          
+          <div class="auth-graphic-content">
+            <h2>Authorized Verification</h2>
+            <p>Registration requires a valid client contract ID or vetted organizational email domain. Security audits verify credentials within 24 hours.</p>
+          </div>
+        </div>
+
+        <!-- Right Form Side -->
+        <div class="auth-form-side">
+          <h2>Create Account</h2>
+          <p class="auth-subtitle">Already have an account? <a href="signin.html">Sign In Here</a></p>
+          
+          <div class="role-toggle-container">
+            <div class="role-btn active" id="role-user" onclick="setRole('user')">Subscriber Account</div>
+            <div class="role-btn" id="role-admin" onclick="setRole('admin')">Staff Terminal</div>
+          </div>
+
+          <form id="signup-form" onsubmit="handleSignup(event)">
+            <div class="form-group" style="margin-bottom: 16px;">
+              <label for="u-name">Full Name</label>
+              <input type="text" id="u-name" class="form-control" placeholder="John Doe" required>
+            </div>
+            
+            <div class="form-group" style="margin-bottom: 16px;">
+              <label for="u-email">Corporate Email</label>
+              <input type="email" id="u-email" class="form-control" placeholder="operations@company.com" required>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 16px;">
+              <label for="u-cid">Contract ID / Reference Code</label>
+              <input type="text" id="u-cid" class="form-control" placeholder="STK-990-2026" required>
+            </div>
+            
+            <div class="form-group" style="margin-bottom: 16px;">
+              <label for="u-pass">Choose Security Password</label>
+              <input type="password" id="u-pass" class="form-control" placeholder="••••••••••••" required>
+            </div>
+
+            <div class="checkbox-group" style="margin-bottom: 20px;">
+              <input type="checkbox" id="terms" required>
+              <label for="terms">I agree to Stackly Security Service Level Terms</label>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%;">Initialize Account</button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <script src="js/script.js"></script>
+
+  <!-- Signup Form Redirect Script -->
+  <script>
+    let currentRole = 'user';
+
+    function setRole(role) {
+      currentRole = role;
+      document.getElementById('role-user').classList.remove('active');
+      document.getElementById('role-admin').classList.remove('active');
+      
+      if (role === 'user') {
+        document.getElementById('role-user').classList.add('active');
+      } else {
+        document.getElementById('role-admin').classList.add('active');
+      }
+    }
+
+    function handleSignup(e) {
+      e.preventDefault();
+      alert('Registration request whitelisted. Verification audit email has been sent. Redirecting to sign in page...');
+      window.location.href = 'signin.html';
+    }
+  </script>
+</body>
+</html>

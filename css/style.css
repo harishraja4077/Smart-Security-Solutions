@@ -959,21 +959,6 @@ body.menu-open::after {
   position: relative;
 }
 
-.process-grid::before {
-  content: '';
-  position: absolute;
-  top: 75px;
-  left: 10%;
-  right: 10%;
-  height: 2px;
-  background-color: rgba(var(--color-dark-rgb), 0.1);
-  z-index: 1;
-}
-
-.dark-theme .process-grid::before {
-  background-color: rgba(var(--color-white-rgb), 0.1);
-}
-
 .process-step {
   text-align: center;
   position: relative;

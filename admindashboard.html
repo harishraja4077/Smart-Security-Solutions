@@ -7,89 +7,311 @@
   <meta name="description" content="Access the Stackly Admin Command Terminal to monitor client installations, system logs, whitelists, and database metrics.">
   <link rel="stylesheet" href="css/style.css">
   <style>
-    /* Admin Dashboard specific overrides to support sidebar next to panel in 3-color palette */
+    /* Reset and set dashboard layouts */
+    body.dashboard-body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #f4f6f8 !important;
+      color: var(--color-dark) !important;
+      height: 100vh;
+    }
+
+    /* Mobile sidebar hamburger toggle button (hidden on desktop) */
+    .mobile-sidebar-toggle {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      background-color: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 8px;
+      cursor: pointer;
+      flex-shrink: 0;
+      margin-left: 16px;
+    }
+    .mobile-sidebar-toggle span {
+      display: block;
+      width: 18px;
+      height: 2px;
+      background-color: #ffffff;
+      border-radius: 2px;
+      position: relative;
+    }
+    .mobile-sidebar-toggle span::before,
+    .mobile-sidebar-toggle span::after {
+      content: '';
+      display: block;
+      width: 18px;
+      height: 2px;
+      background-color: #ffffff;
+      border-radius: 2px;
+      position: absolute;
+      left: 0;
+    }
+    .mobile-sidebar-toggle span::before { top: -6px; }
+    .mobile-sidebar-toggle span::after  { top: 6px; }
+
     .dash-layout {
       display: grid;
-      grid-template-columns: 260px 1fr;
-      gap: 40px;
-      padding: 60px 0;
+      grid-template-columns: 280px 1fr;
+      height: 100vh;
+      width: 100vw;
+      overflow: hidden;
+      gap: 0;
+      padding: 0;
     }
+
+    /* Hide the site-header and hero sections completely */
+    .site-header, .subpage-hero {
+      display: none !important;
+    }
+
+    /* Sidebar container styling (dark) */
     .dash-sidebar-container {
-      background-color: var(--color-dark);
-      border: 1px solid rgba(var(--color-accent-rgb), 0.15);
-      border-radius: 8px;
-      padding: 30px 20px;
-      color: var(--color-white);
-      height: fit-content;
+      background-color: #0a0f1d !important;
+      border: none !important;
+      border-right: 1px solid rgba(255, 255, 255, 0.05) !important;
+      border-radius: 0 !important;
+      padding: 30px 20px !important;
+      color: var(--color-white) !important;
+      height: 100vh !important;
+      position: relative !important;
+      top: 0 !important;
+      display: flex !important;
+      flex-direction: column !important;
+      z-index: 100 !important;
+      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
     }
-    .dash-profile {
-      text-align: center;
-      padding-bottom: 24px;
-      border-bottom: 1px solid rgba(var(--color-white-rgb), 0.08);
-      margin-bottom: 24px;
+
+    .sidebar-logo {
+      margin-bottom: 40px;
+      padding-left: 10px;
     }
-    .dash-profile-img {
-      width: 64px;
-      height: 64px;
-      border-radius: 50%;
-      border: 2px solid var(--color-accent);
-      margin-bottom: 12px;
-      object-fit: cover;
+
+    .sidebar-logo img {
+      height: 35px;
+      width: auto;
     }
-    .dash-profile h4 {
-      font-size: 16px;
-      color: var(--color-white);
-    }
-    .dash-profile p {
-      font-size: 12px;
-      color: var(--color-accent);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      font-weight: 600;
-      margin-top: 4px;
-    }
+
     .dash-nav-menu {
       display: flex;
       flex-direction: column;
       gap: 8px;
+      flex-grow: 1;
     }
+
     .dash-nav-btn {
       display: flex;
       align-items: center;
-      gap: 12px;
-      padding: 12px 16px;
-      border-radius: 4px;
+      gap: 15px;
+      padding: 14px 20px;
+      border-radius: 8px;
       font-family: var(--font-heading);
       font-weight: 600;
-      font-size: 14px;
-      color: rgba(var(--color-white-rgb), 0.7);
+      font-size: 15px;
+      color: rgba(255, 255, 255, 0.7) !important;
       cursor: pointer;
-      transition: var(--transition-fast);
+      transition: all var(--transition-fast);
+      text-decoration: none;
     }
-    .dash-nav-btn:hover, .dash-nav-btn.active {
-      background-color: rgba(var(--color-accent-rgb), 0.1);
-      color: var(--color-accent);
+
+    .dash-nav-btn:hover {
+      background-color: rgba(255, 255, 255, 0.05) !important;
+      color: var(--color-white) !important;
     }
+
+    .dash-nav-btn.active {
+      background-color: rgba(16, 185, 129, 0.15) !important;
+      color: var(--color-accent) !important;
+    }
+
+    .sidebar-footer {
+      margin-top: auto;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 20px;
+    }
+
+    .logout-btn {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #ef4444 !important;
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 15px;
+      padding: 12px 20px;
+      border-radius: 8px;
+      transition: all var(--transition-fast);
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .logout-btn:hover {
+      background-color: rgba(239, 68, 68, 0.1);
+    }
+
+    /* Main Area Container */
+    .dash-main-area {
+      background-color: #f4f6f8 !important;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      padding: 0 !important;
+    }
+
+    /* Top Header inside main area */
+    .dash-header {
+      height: 80px;
+      background-color: #ffffff;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      flex-shrink: 0;
+      width: 100%;
+    }
+
+    .dash-header-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--color-dark) !important;
+      font-family: var(--font-heading);
+      margin: 0;
+    }
+
+    /* User Profile Chip */
+    .user-profile-chip {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 6px 16px;
+      border-radius: 50px;
+      background-color: rgba(10, 15, 29, 0.03);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .profile-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #d1b894;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .profile-info {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.2;
+      text-align: left;
+    }
+
+    .profile-email {
+      font-family: var(--font-heading);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--color-dark) !important;
+    }
+
+    .profile-role {
+      font-size: 11px;
+      color: rgba(10, 15, 29, 0.5) !important;
+      font-weight: 500;
+    }
+
+    /* Scrollable Area below header */
+    .dash-content-body {
+      flex-grow: 1;
+      overflow-y: auto;
+      padding: 40px;
+      width: 100%;
+    }
+
+    /* Cards & Panel Overrides for Light Theme Dashboard */
+    .dashboard-stat-card {
+      background-color: #ffffff !important;
+      border: 1px solid rgba(0, 0, 0, 0.06) !important;
+      border-radius: 12px !important;
+      padding: 24px 30px !important;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.015) !important;
+      color: var(--color-dark) !important;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .dashboard-stat-card h4 {
+      color: rgba(10, 15, 29, 0.45) !important;
+      font-size: 12px !important;
+      text-transform: uppercase !important;
+      letter-spacing: 0.5px !important;
+      margin-bottom: 6px !important;
+      font-weight: 600 !important;
+    }
+
+    .dashboard-stat-value {
+      color: var(--color-dark) !important;
+      font-size: 26px !important;
+      font-weight: 700 !important;
+      margin-top: 0 !important;
+    }
+
+    .dashboard-panel {
+      background-color: #ffffff !important;
+      border: 1px solid rgba(0, 0, 0, 0.06) !important;
+      border-radius: 12px !important;
+      padding: 30px !important;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.015) !important;
+      color: var(--color-dark) !important;
+    }
+
+    .panel-title {
+      font-size: 18px !important;
+      font-weight: 700 !important;
+      color: var(--color-dark) !important;
+      margin-bottom: 20px !important;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06) !important;
+      padding-bottom: 12px !important;
+    }
+
+    .db-table-wrapper {
+      background-color: #ffffff !important;
+      border: 1px solid rgba(0, 0, 0, 0.06) !important;
+      border-radius: 8px !important;
+      overflow: hidden;
+    }
+
     .db-table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 20px;
-      font-size: 14px;
+      margin-top: 0 !important;
     }
-    .db-table th, .db-table td {
-      padding: 14px 16px;
-      text-align: left;
-      border-bottom: 1px solid rgba(var(--color-white-rgb), 0.08);
-    }
+
     .db-table th {
-      font-family: var(--font-heading);
-      font-weight: 700;
-      color: var(--color-accent);
-      background-color: rgba(var(--color-accent-rgb), 0.05);
+      background-color: rgba(10, 15, 29, 0.02) !important;
+      color: var(--color-dark) !important;
+      font-weight: 600 !important;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06) !important;
     }
+
+    .db-table td {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06) !important;
+      color: rgba(10, 15, 29, 0.75) !important;
+    }
+
     .db-table tr:hover td {
-      background-color: rgba(var(--color-white-rgb), 0.02);
+      background-color: rgba(10, 15, 29, 0.01) !important;
     }
+
     .badge-status {
       font-family: var(--font-heading);
       font-weight: 700;
@@ -98,154 +320,223 @@
       border-radius: 50px;
       text-transform: uppercase;
     }
+
     .badge-active {
-      background-color: rgba(16, 185, 129, 0.15);
-      color: var(--color-accent);
+      background-color: rgba(16, 185, 129, 0.15) !important;
+      color: var(--color-accent) !important;
     }
+
     .badge-pending {
-      background-color: rgba(255, 255, 255, 0.1);
-      color: var(--color-white);
+      background-color: rgba(10, 15, 29, 0.08) !important;
+      color: var(--color-dark) !important;
     }
-    @media (max-width: 900px) {
-      .dash-layout { grid-template-columns: 1fr; }
-      .db-table-wrapper { overflow-x: auto; }
+
+    .form-control {
+      background-color: #ffffff !important;
+      border: 1px solid rgba(0, 0, 0, 0.12) !important;
+      color: var(--color-dark) !important;
+      border-radius: 6px !important;
+      padding: 12px 16px !important;
     }
-    /* Session user chip in header */
-    .user-session-chip {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      background-color: rgba(var(--color-accent-rgb), 0.08);
-      border: 1px solid rgba(var(--color-accent-rgb), 0.25);
-      border-radius: 50px;
-      padding: 6px 14px 6px 8px;
-      cursor: default;
-      transition: var(--transition-fast);
-    }
-    .user-session-chip:hover {
-      background-color: rgba(var(--color-accent-rgb), 0.14);
-      border-color: var(--color-accent);
-    }
-    .user-chip-avatar {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--color-accent), #059669);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--font-heading);
-      font-weight: 700;
-      font-size: 12px;
-      color: var(--color-dark);
-      flex-shrink: 0;
-      text-transform: uppercase;
-    }
-    .user-chip-email {
-      font-family: var(--font-heading);
-      font-size: 13px;
-      font-weight: 600;
-      color: rgba(var(--color-white-rgb), 0.85);
-      max-width: 160px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-    .dash-profile-email-badge {
-      display: inline-block;
-      background-color: rgba(var(--color-accent-rgb), 0.1);
-      border: 1px solid rgba(var(--color-accent-rgb), 0.25);
-      border-radius: 50px;
-      padding: 4px 12px;
-      font-size: 11px;
-      font-weight: 500;
-      color: rgba(var(--color-white-rgb), 0.7);
-      margin-top: 8px;
-      letter-spacing: 0.3px;
-      max-width: 100%;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
+
     .dash-tab-content {
       display: none;
     }
     .dash-tab-content.active {
       display: block;
     }
+
+    /* Live support hotline CTA in dashboard style */
+    .live-feed-section {
+      background-color: #ffffff !important;
+      border: 1px solid rgba(0, 0, 0, 0.06) !important;
+      border-radius: 12px !important;
+      padding: 40px !important;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.015) !important;
+      color: var(--color-dark) !important;
+      margin-top: 40px !important;
+    }
+
+    .live-feed-section h2 {
+      color: var(--color-dark) !important;
+    }
+
+    .live-feed-section p {
+      color: rgba(10, 15, 29, 0.6) !important;
+    }
+
+    /* ── Mobile Responsive Layout ─────────────────────────────── */
+    @media (max-width: 992px) {
+
+      /* Body can now scroll vertically on mobile */
+      body.dashboard-body {
+        overflow-y: auto !important;
+        height: auto !important;
+      }
+
+      /* Stack sidebar above content */
+      .dash-layout {
+        grid-template-columns: 1fr !important;
+        height: auto !important;
+        overflow: visible !important;
+        display: flex !important;
+        flex-direction: column !important;
+      }
+
+      /* Sidebar becomes a compact horizontal nav strip */
+      .dash-sidebar-container {
+        height: auto !important;
+        width: 100% !important;
+        min-height: unset !important;
+        position: relative !important;
+        border-right: none !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+        padding: 16px 20px !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        flex-wrap: wrap !important;
+        gap: 8px !important;
+        box-shadow: 0 2px 12px rgba(0,0,0,0.25) !important;
+      }
+
+      /* Logo at the left of the mobile nav strip */
+      .sidebar-logo {
+        margin-bottom: 0 !important;
+        margin-right: auto;
+        padding-left: 0 !important;
+        flex-shrink: 0;
+      }
+
+      /* Nav buttons become a horizontal scrollable strip */
+      .dash-nav-menu {
+        display: flex !important;
+        flex-direction: row !important;
+        gap: 6px !important;
+        flex-grow: 0 !important;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        width: 100%;
+        margin-top: 12px;
+        padding-bottom: 4px;
+      }
+      .dash-nav-menu::-webkit-scrollbar { display: none; }
+
+      .dash-nav-btn {
+        padding: 8px 14px !important;
+        font-size: 12px !important;
+        border-radius: 50px !important;
+        white-space: nowrap !important;
+        flex-shrink: 0 !important;
+        gap: 6px !important;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      /* Sidebar footer (logout) — inline at right */
+      .sidebar-footer {
+        margin-top: 0 !important;
+        border-top: none !important;
+        padding-top: 0 !important;
+        flex-shrink: 0;
+      }
+
+      .logout-btn {
+        padding: 8px 14px !important;
+        font-size: 12px !important;
+        border-radius: 50px !important;
+        border: 1px solid rgba(239, 68, 68, 0.25) !important;
+        white-space: nowrap;
+      }
+
+      /* Main area — full height auto */
+      .dash-main-area {
+        height: auto !important;
+        overflow: visible !important;
+        display: block !important;
+      }
+
+      /* Header inside main area */
+      .dash-header {
+        padding: 0 20px !important;
+        height: 64px !important;
+      }
+
+      .dash-header-title {
+        font-size: 16px !important;
+      }
+
+      .user-profile-chip {
+        display: none !important;
+      }
+
+      /* Scrollable content body */
+      .dash-content-body {
+        padding: 20px !important;
+        height: auto !important;
+        overflow: visible !important;
+      }
+
+      /* Stat cards — 1 column on mobile */
+      .dashboard-grid-3 {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+      }
+
+      /* Tables — allow horizontal scroll */
+      .db-table-wrapper {
+        overflow-x: auto !important;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .dashboard-grid-3 {
+        grid-template-columns: 1fr !important;
+      }
+    }
   </style>
 </head>
-<body class="dark-theme">
+<body class="dashboard-body">
 
-  <!-- Header -->
-  <header class="site-header">
-    <div class="container header-container">
-      <a href="index.html" class="logo">
-        <img src="images/logo.webp" alt="Stackly Logo">
-      </a>
-
-      <!-- Navigation -->
-      <nav class="nav-menu" id="nav-menu">
-        <a href="index.html" class="nav-link">Home</a>
-        <a href="about.html" class="nav-link">About</a>
-        <a href="service.html" class="nav-link">Services</a>
-        <a href="blog.html" class="nav-link">Blog</a>
-        <a href="contact.html" class="nav-link">Contact</a>
-      </nav>
-
-      <div class="header-actions">
-        <!-- Session User Chip -->
-        <div class="user-session-chip" id="header-user-chip" title="Signed in as" style="display:none;">
-          <div class="user-chip-avatar" id="header-user-initial">A</div>
-          <span class="user-chip-email" id="header-user-email"></span>
-        </div>
-        <a href="signin.html" class="btn btn-primary" onclick="localStorage.removeItem('stackly_user_email'); localStorage.removeItem('stackly_user_role');">Sign Out</a>
-        <div class="mobile-toggle" id="mobile-toggle">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
+  <div class="dash-layout">
+    
+    <!-- Dashboard Sidebar -->
+    <div class="dash-sidebar-container reveal-left">
+      <div class="sidebar-logo">
+        <a href="index.html" class="logo">
+          <img src="images/logo.webp" alt="Stackly Logo">
+        </a>
+      </div>
+      <div class="dash-nav-menu">
+        <div class="dash-nav-btn active" onclick="switchTab('health')">🖥 System Health</div>
+        <div class="dash-nav-btn" onclick="switchTab('clients')">👥 Client Database</div>
+        <div class="dash-nav-btn" onclick="switchTab('telemetry')">🪵 Telemetry Logs</div>
+        <div class="dash-nav-btn" onclick="switchTab('overrides')">⚙ Cluster Overrides</div>
+        <div class="dash-nav-btn" onclick="switchTab('tickets')">🎫 Support Tickets</div>
+      </div>
+      <div class="sidebar-footer">
+        <a href="signin.html" class="logout-btn" onclick="localStorage.removeItem('stackly_user_email'); localStorage.removeItem('stackly_user_role');">
+          <span style="font-size:18px;">⎋</span> Log Out
+        </a>
       </div>
     </div>
-  </header>
 
-  <!-- Section 1: Subpage Hero -->
-  <section class="subpage-hero">
-    <div class="cyber-grid"></div>
-    <div class="container">
-      <h1>Staff Admin Terminal</h1>
-      <div class="breadcrumbs">
-        <a href="index.html">Home</a>
-        <span class="separator">//</span>
-        <span class="current">Admin Terminal</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- Section 2: Sidebar and Overview Panel -->
-  <section class="container">
-    <div class="dash-layout">
+    <!-- Main Panel area containing various sections -->
+    <div class="dash-main-area reveal-right">
       
-      <!-- Dashboard Sidebar -->
-      <div class="dash-sidebar-container reveal-left">
-        <div class="dash-profile">
-          <div class="user-chip-avatar" id="sidebar-user-initial" style="width:64px;height:64px;font-size:22px;margin:0 auto 12px;">A</div>
-          <h4 id="sidebar-user-name">Loading...</h4>
-          <p style="color: rgba(var(--color-white-rgb),0.5); font-size:11px; text-transform:uppercase; letter-spacing:1px;">Terminal Admin</p>
-          <span class="dash-profile-email-badge" id="sidebar-user-email">—</span>
+      <!-- Top Dashboard Header -->
+      <header class="dash-header">
+        <h2 class="dash-header-title">Administrative Control Center</h2>
+        <div class="user-profile-chip" id="header-user-chip" style="display: none;">
+          <div class="profile-avatar" id="header-user-initial">A</div>
+          <div class="profile-info">
+            <span class="profile-email" id="header-user-email">Loading...</span>
+            <span class="profile-role" id="header-user-role">Terminal Admin</span>
+          </div>
         </div>
-        <div class="dash-nav-menu">
-          <div class="dash-nav-btn active" onclick="switchTab('health')">🖥 System Health</div>
-          <div class="dash-nav-btn" onclick="switchTab('clients')">👥 Client Database</div>
-          <div class="dash-nav-btn" onclick="switchTab('telemetry')">🪵 Telemetry Logs</div>
-          <div class="dash-nav-btn" onclick="switchTab('overrides')">⚙ Cluster Overrides</div>
-          <div class="dash-nav-btn" onclick="switchTab('tickets')">🎫 Support Tickets</div>
-          <a href="signin.html" class="dash-nav-btn" style="margin-top: 24px; color: var(--color-accent);" onclick="localStorage.removeItem('stackly_user_email'); localStorage.removeItem('stackly_user_role');">⎋ Close Command Session</a>
-        </div>
-      </div>
+      </header>
 
-      <!-- Main Panel area containing various sections -->
-      <div class="dash-main-area reveal-right">
+      <!-- Scrollable Area below header -->
+      <div class="dash-content-body">
         
         <!-- SECTION 1: System Health (Overview) -->
         <div id="tab-health" class="dash-tab-content active">
@@ -483,24 +774,20 @@
           </div>
         </div>
 
-      </div>
+        <!-- Section 8: Tech override hotlines CTA -->
+        <section class="live-feed-section">
+          <div class="container text-center reveal-up">
+            <h2 style="font-size: 32px; color: var(--color-white); margin-bottom: 16px; font-family: var(--font-heading);">Global infrastructure crisis?</h2>
+            <p style="color: rgba(var(--color-white-rgb), 0.75); max-width: 600px; margin: 0 auto 30px;">In the event of a cluster-wide service degradation or physical facility breach, initiate the emergency hardware override protocols.</p>
+            <a href="tel:+18005559999" class="btn btn-primary">⚠️ INITIATE BACKDOOR OVERRIDE</a>
+          </div>
+        </section>
 
-    </div>
-  </section>
+      </div> <!-- .dash-content-body -->
 
-      </div>
+    </div> <!-- .dash-main-area -->
 
-    </div>
-  </section>
-
-  <!-- Section 8: Tech override hotlines CTA -->
-  <section class="live-feed-section">
-    <div class="container text-center reveal-up">
-      <h2 style="font-size: 32px; color: var(--color-white); margin-bottom: 16px; font-family: var(--font-heading);">Global infrastructure crisis?</h2>
-      <p style="color: rgba(var(--color-white-rgb), 0.75); max-width: 600px; margin: 0 auto 30px;">In the event of a cluster-wide service degradation or physical facility breach, initiate the emergency hardware override protocols.</p>
-      <a href="tel:+18005559999" class="btn btn-primary">⚠️ INITIATE BACKDOOR OVERRIDE</a>
-    </div>
-  </section>
+  </div> <!-- .dash-layout -->
 
   <!-- Floating Scroll Progress Button -->
   <div class="scroll-progress" id="scroll-progress">
@@ -544,25 +831,16 @@
 
       const localPart  = email.split('@')[0];
       const initial    = localPart.charAt(0).toUpperCase();
-      const displayName = localPart
-        .replace(/[._-]+/g, ' ')
-        .replace(/\b\w/g, c => c.toUpperCase());
 
-      // Header chip
+      // Show header user chip
       const chip = document.getElementById('header-user-chip');
       if (chip) {
         chip.style.display = 'flex';
-        document.getElementById('header-user-initial').textContent = initial;
-        document.getElementById('header-user-email').textContent   = email;
+        const avatarEl = document.getElementById('header-user-initial');
+        const emailEl  = document.getElementById('header-user-email');
+        if (avatarEl) avatarEl.textContent = initial;
+        if (emailEl)  emailEl.textContent  = email;
       }
-
-      // Sidebar profile
-      const sidebarName  = document.getElementById('sidebar-user-name');
-      const sidebarEmail = document.getElementById('sidebar-user-email');
-      const sidebarInit  = document.getElementById('sidebar-user-initial');
-      if (sidebarName)  sidebarName.textContent  = displayName;
-      if (sidebarEmail) sidebarEmail.textContent = email;
-      if (sidebarInit)  sidebarInit.textContent  = initial;
     })();
   </script>
 </body>

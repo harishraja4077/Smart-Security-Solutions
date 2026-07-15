@@ -179,12 +179,15 @@ body.dark-theme h6 {
 /* Mobile Navigation Blur Overlay — sits BELOW the header */
 body::after {
   content: '';
+  display: block;
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
   background-color: rgba(10, 15, 29, 0.75);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);

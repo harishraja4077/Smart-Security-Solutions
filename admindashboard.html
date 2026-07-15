@@ -582,15 +582,15 @@
         </a>
       </div>
       <div class="dash-nav-menu">
-        <div class="dash-nav-btn active" onclick="switchTab('health')">🖥 System Health</div>
-        <div class="dash-nav-btn" onclick="switchTab('clients')">👥 Client Database</div>
-        <div class="dash-nav-btn" onclick="switchTab('telemetry')">🪵 Telemetry Logs</div>
-        <div class="dash-nav-btn" onclick="switchTab('overrides')">⚙ Cluster Overrides</div>
-        <div class="dash-nav-btn" onclick="switchTab('tickets')">🎫 Support Tickets</div>
+        <div class="dash-nav-btn active" onclick="switchTab('health')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg> System Health</div>
+        <div class="dash-nav-btn" onclick="switchTab('clients')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> Client Database</div>
+        <div class="dash-nav-btn" onclick="switchTab('telemetry')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg> Telemetry Logs</div>
+        <div class="dash-nav-btn" onclick="switchTab('overrides')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg> Cluster Overrides</div>
+        <div class="dash-nav-btn" onclick="switchTab('tickets')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5v2"/><path d="M15 11v2"/><path d="M15 17v2"/><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Support Tickets</div>
       </div>
       <div class="sidebar-footer">
         <a href="signin.html" class="logout-btn" onclick="localStorage.removeItem('stackly_user_email'); localStorage.removeItem('stackly_user_role');">
-          <span style="font-size:18px;">⎋</span> Log Out
+          <span style="font-size:18px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></span> Log Out
         </a>
       </div>
     </div>
@@ -617,21 +617,21 @@
         <div id="tab-health" class="dash-tab-content active">
           <div class="dashboard-grid-3" style="margin-bottom: 30px;">
             <div class="dashboard-stat-card">
-              <div class="dashboard-stat-icon">👥</div>
+              <div class="dashboard-stat-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
               <div class="dashboard-stat-info">
                 <h4>Active Subscriptions</h4>
                 <div class="dashboard-stat-value">1,420</div>
               </div>
             </div>
             <div class="dashboard-stat-card">
-              <div class="dashboard-stat-icon">🖥</div>
+              <div class="dashboard-stat-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
               <div class="dashboard-stat-info">
                 <h4>Server CPU Load</h4>
                 <div class="dashboard-stat-value" style="color: var(--color-accent);">14.2%</div>
               </div>
             </div>
             <div class="dashboard-stat-card">
-              <div class="dashboard-stat-icon">⚠️</div>
+              <div class="dashboard-stat-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
               <div class="dashboard-stat-info">
                 <h4>Active Warnings</h4>
                 <div class="dashboard-stat-value">0</div>
@@ -673,7 +673,7 @@
                 <h4 style="font-size: 20px; color: var(--color-accent);">Node Cluster: Vanguard-01 // NY</h4>
                 <p style="font-size: 14px; color: rgba(var(--color-white-rgb), 0.6); margin-top: 4px;">Uptime: 345 Days 12 Hours // Network Link: 10 Gbps Duplex // Storage Capacity: 1.2 PB / 2.0 PB</p>
               </div>
-              <div class="btn btn-outline" onclick="alert('Cluster Node Vanguard-01 initiated reboot sequence...')">Server Reboot</div>
+              <div class="btn btn-outline" onclick="window.location.href='404.html';">Server Reboot</div>
             </div>
           </div>
         </div>
@@ -681,7 +681,7 @@
         <!-- SECTION 2: Client Database -->
         <div id="tab-clients" class="dash-tab-content">
           <div class="dashboard-panel" style="margin-bottom: 30px;">
-            <h3 class="panel-title">👥 Client Database</h3>
+            <h3 class="panel-title"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> Client Database</h3>
             <p style="color: rgba(var(--color-white-rgb), 0.6); font-size: 14px; margin-bottom: 20px; line-height: 1.5;">Manage active subscribers profiles, contract tiers, and hardware system status links.</p>
             
             <div class="db-table-wrapper" style="margin-bottom: 20px;">
@@ -701,34 +701,34 @@
                     <td>STK-440-2024</td>
                     <td>Enterprise Shield</td>
                     <td><span class="badge-status badge-active">Active</span></td>
-                    <td><button class="btn btn-outline" style="padding: 6px 12px; font-size: 12px;" onclick="alert('Viewing Apex System parameters...')">Inspect</button></td>
+                    <td><button class="btn btn-outline" style="padding: 6px 12px; font-size: 12px;" onclick="window.location.href='404.html';">Inspect</button></td>
                   </tr>
                   <tr>
                     <td>Innotech Corp</td>
                     <td>STK-112-2025</td>
                     <td>Enterprise Shield</td>
                     <td><span class="badge-status badge-active">Active</span></td>
-                    <td><button class="btn btn-outline" style="padding: 6px 12px; font-size: 12px;" onclick="alert('Viewing Innotech parameters...')">Inspect</button></td>
+                    <td><button class="btn btn-outline" style="padding: 6px 12px; font-size: 12px;" onclick="window.location.href='404.html';">Inspect</button></td>
                   </tr>
                   <tr>
                     <td>Arthur Chen</td>
                     <td>STK-990-2026</td>
                     <td>Business Safe</td>
                     <td><span class="badge-status badge-pending">Vetting</span></td>
-                    <td><button class="btn btn-primary" style="padding: 6px 12px; font-size: 12px; color: var(--color-dark);" onclick="alert('Subscriber STK-990-2026 whitelisted successfully!');">Approve</button></td>
+                    <td><button class="btn btn-primary" style="padding: 6px 12px; font-size: 12px; color: var(--color-dark);" onclick="window.location.href='404.html';">Approve</button></td>
                   </tr>
                 </tbody>
               </table>
             </div>
 
-            <button class="btn btn-primary" onclick="alert('Opening Add Subscriber Form...')">Add New Subscriber Client</button>
+            <button class="btn btn-primary" onclick="window.location.href='404.html';">Add New Subscriber Client</button>
           </div>
         </div>
 
         <!-- SECTION 3: Telemetry Logs -->
         <div id="tab-telemetry" class="dash-tab-content">
           <div class="dashboard-panel" style="margin-bottom: 30px;">
-            <h3 class="panel-title">🪵 Telemetry Logs</h3>
+            <h3 class="panel-title"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg> Telemetry Logs</h3>
             <p style="color: rgba(var(--color-white-rgb), 0.6); font-size: 14px; margin-bottom: 20px; line-height: 1.5;">Realtime telemetry package telemetry routing and node response logs. Diagnostic status stream of connected cameras and sensors.</p>
             
             <div class="activity-list" style="margin-bottom: 20px;">
@@ -762,17 +762,17 @@
               </div>
             </div>
 
-            <button class="btn btn-outline" onclick="alert('Exporting full telemetry logs to CSV...')">Export Logs Data</button>
+            <button class="btn btn-outline" onclick="window.location.href='404.html';">Export Logs Data</button>
           </div>
         </div>
 
         <!-- SECTION 4: Cluster Overrides -->
         <div id="tab-overrides" class="dash-tab-content">
           <div class="dashboard-panel" style="margin-bottom: 30px;">
-            <h3 class="panel-title">⚙ Cluster Overrides</h3>
+            <h3 class="panel-title"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg> Cluster Overrides</h3>
             <p style="color: rgba(var(--color-white-rgb), 0.6); font-size: 14px; margin-bottom: 20px; line-height: 1.5;">Apply node parameter policy overrides or override active security configurations manually.</p>
             
-            <form onsubmit="event.preventDefault(); alert('Global thresholds updated across cluster nodes.');" style="margin-bottom: 25px;">
+            <form onsubmit="event.preventDefault(); window.location.href='404.html';" style="margin-bottom: 25px;">
               <div class="form-grid">
                 <div class="form-group">
                   <label for="p-firm">Cluster Firmware Deployment Mode</label>
@@ -799,7 +799,7 @@
                 <h4 style="font-size: 15px; color: var(--color-white);">Intrusion Alert Level Block</h4>
                 <p style="font-size: 12px; color: rgba(var(--color-white-rgb), 0.5); margin-top: 4px;">Escalate global network threat alerts immediately to Level Red.</p>
               </div>
-              <button class="btn btn-primary" style="background-color: #ef4444; border-color: #ef4444; color: var(--color-white);" onclick="alert('⚠️ Warning! Network level overridden to Level Red alert. Dispatches triggered.')">Escalate Alert Level</button>
+              <button class="btn btn-primary" style="background-color: #ef4444; border-color: #ef4444; color: var(--color-white);" onclick="window.location.href='404.html';">Escalate Alert Level</button>
             </div>
           </div>
         </div>
@@ -807,7 +807,7 @@
         <!-- SECTION 5: Support Tickets -->
         <div id="tab-tickets" class="dash-tab-content">
           <div class="dashboard-panel" style="margin-bottom: 30px;">
-            <h3 class="panel-title">🎫 Support Tickets</h3>
+            <h3 class="panel-title"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5v2"/><path d="M15 11v2"/><path d="M15 17v2"/><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Support Tickets</h3>
             <p style="color: rgba(var(--color-white-rgb), 0.6); font-size: 14px; margin-bottom: 20px; line-height: 1.5;">Incoming support dispatches queries and camera repair ticket requests from subscriber clients.</p>
             
             <div class="db-table-wrapper">
@@ -827,21 +827,21 @@
                     <td>Apex Logistics</td>
                     <td>Cam 04 back parking focus calibration out</td>
                     <td><span class="badge-status" style="background-color: rgba(245,158,11,0.15); color: #f59e0b;">Medium</span></td>
-                    <td><button class="btn btn-primary" style="padding: 6px 12px; font-size: 12px; color: var(--color-dark);" onclick="alert('Apex TCK-402 assigned to Hardware Dispatch Squad!')">Assign Squad</button></td>
+                    <td><button class="btn btn-primary" style="padding: 6px 12px; font-size: 12px; color: var(--color-dark);" onclick="window.location.href='404.html';">Assign Squad</button></td>
                   </tr>
                   <tr>
                     <td>TCK-398</td>
                     <td>Innotech Corp</td>
                     <td>Server Room biometric gate backup battery status warning</td>
                     <td><span class="badge-status" style="background-color: rgba(239,68,68,0.15); color: #ef4444;">High</span></td>
-                    <td><button class="btn btn-primary" style="padding: 6px 12px; font-size: 12px; color: var(--color-dark);" onclick="alert('Innotech TCK-398 assigned to Bio-Gate Specialists!')">Assign Squad</button></td>
+                    <td><button class="btn btn-primary" style="padding: 6px 12px; font-size: 12px; color: var(--color-dark);" onclick="window.location.href='404.html';">Assign Squad</button></td>
                   </tr>
                   <tr>
                     <td>TCK-311</td>
                     <td>Arthur Chen</td>
                     <td>Mobile app setup walkthrough notification error</td>
                     <td><span class="badge-status" style="background-color: rgba(255,255,255,0.1); color: var(--color-white);">Low</span></td>
-                    <td><button class="btn btn-outline" style="padding: 6px 12px; font-size: 12px;" onclick="alert('Ticket TCK-311 marked as resolved.')">Resolve</button></td>
+                    <td><button class="btn btn-outline" style="padding: 6px 12px; font-size: 12px;" onclick="window.location.href='404.html';">Resolve</button></td>
                   </tr>
                 </tbody>
               </table>
@@ -854,7 +854,7 @@
           <div class="container text-center reveal-up">
             <h2 style="font-size: 32px; color: var(--color-white); margin-bottom: 16px; font-family: var(--font-heading);">Global infrastructure crisis?</h2>
             <p style="color: rgba(var(--color-white-rgb), 0.75); max-width: 600px; margin: 0 auto 30px;">In the event of a cluster-wide service degradation or physical facility breach, initiate the emergency hardware override protocols.</p>
-            <a href="tel:+18005559999" class="btn btn-primary">⚠️ INITIATE BACKDOOR OVERRIDE</a>
+            <a href="404.html" class="btn btn-primary"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 6px;"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> INITIATE BACKDOOR OVERRIDE</a>
           </div>
         </section>
 

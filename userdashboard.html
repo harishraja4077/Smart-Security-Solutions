@@ -596,15 +596,15 @@
         </a>
       </div>
       <div class="dash-nav-menu">
-        <div class="dash-nav-btn active" onclick="switchTab('console')">🖥 Console Terminal</div>
-        <div class="dash-nav-btn" onclick="switchTab('camera')">📹 Camera Matrix</div>
-        <div class="dash-nav-btn" onclick="switchTab('gateway')">🪵 Gateway Logs</div>
-        <div class="dash-nav-btn" onclick="switchTab('control')">⚙ Control Parameters</div>
-        <div class="dash-nav-btn" onclick="switchTab('billing')">💳 Subscription Billing</div>
+        <div class="dash-nav-btn active" onclick="switchTab('console')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg> Console Terminal</div>
+        <div class="dash-nav-btn" onclick="switchTab('camera')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg> Camera Matrix</div>
+        <div class="dash-nav-btn" onclick="switchTab('gateway')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg> Gateway Logs</div>
+        <div class="dash-nav-btn" onclick="switchTab('control')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg> Control Parameters</div>
+        <div class="dash-nav-btn" onclick="switchTab('billing')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg> Subscription Billing</div>
       </div>
       <div class="sidebar-footer">
         <a href="signin.html" class="logout-btn" onclick="localStorage.removeItem('stackly_user_email'); localStorage.removeItem('stackly_user_role');">
-          <span style="font-size:18px;">⎋</span> Log Out
+          <span style="font-size:18px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></span> Log Out
         </a>
       </div>
     </div>
@@ -631,21 +631,21 @@
         <div id="tab-console" class="dash-tab-content active">
           <div class="dashboard-grid-3" style="margin-bottom: 30px;">
             <div class="dashboard-stat-card">
-              <div class="dashboard-stat-icon">📹</div>
+              <div class="dashboard-stat-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
               <div class="dashboard-stat-info">
                 <h4>Cameras Status</h4>
                 <div class="dashboard-stat-value">12 / 12 Online</div>
               </div>
             </div>
             <div class="dashboard-stat-card">
-              <div class="dashboard-stat-icon">🔑</div>
+              <div class="dashboard-stat-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg></div>
               <div class="dashboard-stat-info">
                 <h4>Entry Gates</h4>
                 <div class="dashboard-stat-value">Securely Locked</div>
               </div>
             </div>
             <div class="dashboard-stat-card">
-              <div class="dashboard-stat-icon">🚨</div>
+              <div class="dashboard-stat-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></div>
               <div class="dashboard-stat-info">
                 <h4>Perimeter Alarm</h4>
                 <div class="dashboard-stat-value" style="color: var(--color-accent);">Armed & Guarded</div>
@@ -672,7 +672,7 @@
         <!-- SECTION 2: Camera Matrix -->
         <div id="tab-camera" class="dash-tab-content">
           <div class="dashboard-panel" style="margin-bottom: 30px;">
-            <h3 class="panel-title">📹 Camera Matrix</h3>
+            <h3 class="panel-title"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg> Camera Matrix</h3>
             <p style="color: rgba(var(--color-white-rgb), 0.6); font-size: 14px; margin-bottom: 20px; line-height: 1.5;">Real-time feed streams from AI-filtered camera sensors. Select a stream to activate focus override or download archive footage.</p>
             
             <div class="dash-feed-grid" style="margin-bottom: 25px;">
@@ -699,7 +699,7 @@
                 <h4 style="font-size: 15px; color: var(--color-white);">Manual Panic Override</h4>
                 <p style="font-size: 12px; color: rgba(var(--color-white-rgb), 0.5); margin-top: 4px;">Trigger instant backup audio alarm sirens across all connected nodes.</p>
               </div>
-              <button class="btn btn-primary" onclick="alert('⚠️ Emergency siren alarm broadcasted across all nodes!')">Trigger Alarm Siren</button>
+              <button class="btn btn-primary" onclick="window.location.href='404.html';">Trigger Alarm Siren</button>
             </div>
           </div>
         </div>
@@ -707,7 +707,7 @@
         <!-- SECTION 3: Gateway Logs -->
         <div id="tab-gateway" class="dash-tab-content">
           <div class="dashboard-panel" style="margin-bottom: 30px;">
-            <h3 class="panel-title">🪵 Gateway Logs</h3>
+            <h3 class="panel-title"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg> Gateway Logs</h3>
             <p style="color: rgba(var(--color-white-rgb), 0.6); font-size: 14px; margin-bottom: 20px; line-height: 1.5;">Access control card swipe triggers, biometric gateways verifications, and custom node alerts log logs.</p>
             
             <div class="activity-list">
@@ -753,10 +753,10 @@
         <!-- SECTION 4: Control Parameters -->
         <div id="tab-control" class="dash-tab-content">
           <div class="dashboard-panel" style="margin-bottom: 30px;">
-            <h3 class="panel-title">⚙ Control Parameters</h3>
+            <h3 class="panel-title"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg> Control Parameters</h3>
             <p style="color: rgba(var(--color-white-rgb), 0.6); font-size: 14px; margin-bottom: 20px; line-height: 1.5;">Customize security sensitivity thresholds, auto-dispatch latency, and hardware diagnostic settings.</p>
             
-            <form onsubmit="event.preventDefault(); alert('Control parameters updated on active server.');">
+            <form onsubmit="event.preventDefault(); window.location.href='404.html';">
               <div class="form-grid">
                 <div class="form-group">
                   <label for="p-sens">AI Motion Threshold Sensitivity</label>
@@ -789,7 +789,7 @@
         <!-- SECTION 5: Subscription Billing -->
         <div id="tab-billing" class="dash-tab-content">
           <div class="dashboard-panel" style="margin-bottom: 30px;">
-            <h3 class="panel-title">💳 Subscription Billing</h3>
+            <h3 class="panel-title"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg> Subscription Billing</h3>
             <p style="color: rgba(var(--color-white-rgb), 0.6); font-size: 14px; margin-bottom: 20px; line-height: 1.5;">Manage your billing invoices, credit card profiles, and active tier protection packages.</p>
             
             <div style="background-color: rgba(var(--color-accent-rgb), 0.05); border: 1px solid rgba(var(--color-accent-rgb), 0.25); border-radius: 6px; padding: 25px; margin-bottom: 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
@@ -839,8 +839,8 @@
             </div>
 
             <div style="display: flex; gap: 15px; flex-wrap: wrap;">
-              <button class="btn btn-primary" onclick="alert('Redirecting to payment details...')">Update Credit Card</button>
-              <button class="btn btn-outline" onclick="alert('Loading plans pricing table...')">Upgrade Plan</button>
+              <button class="btn btn-primary" onclick="window.location.href='404.html';">Update Credit Card</button>
+              <button class="btn btn-outline" onclick="window.location.href='404.html';">Upgrade Plan</button>
             </div>
           </div>
         </div>

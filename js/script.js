@@ -26,7 +26,16 @@ document.addEventListener('DOMContentLoaded', () => {
       const shouldOpen = show !== undefined ? show : !navMenu.classList.contains('open');
       navMenu.classList.toggle('open', shouldOpen);
       mobileToggle.classList.toggle('active', shouldOpen);
-      document.body.classList.toggle('menu-open', shouldOpen);
+      
+      if (shouldOpen) {
+        document.body.style.top = `-${window.scrollY}px`;
+        document.body.classList.add('menu-open');
+      } else {
+        const scrollY = document.body.style.top;
+        document.body.classList.remove('menu-open');
+        document.body.style.top = '';
+        window.scrollTo(0, parseInt(scrollY || '0') * -1);
+      }
       
       // Animate hamburger lines
       const spans = mobileToggle.querySelectorAll('span');

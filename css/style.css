@@ -193,6 +193,9 @@ body::after {
 
 body.menu-open {
   overflow: hidden;
+  position: fixed;
+  left: 0;
+  right: 0;
 }
 
 body.menu-open::after {
@@ -1941,6 +1944,9 @@ textarea.form-control {
 .footer-contact-item span.icon {
   color: var(--color-accent);
   margin-top: 3px;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
 }
 
 .footer-newsletter-desc {
@@ -2777,10 +2783,30 @@ textarea.form-control {
   
   .auth-container {
     grid-template-columns: 1fr;
+    margin: 0 12px;
+    border-radius: 10px;
   }
-  
+
   .auth-graphic-side {
     display: none;
+  }
+
+  .auth-form-side {
+    padding: 32px 24px;
+  }
+
+  .auth-form-side h2 {
+    font-size: 22px;
+  }
+
+  .role-toggle-container {
+    padding: 3px;
+    margin-bottom: 20px;
+  }
+
+  .role-btn {
+    font-size: 12px;
+    padding: 8px 6px;
   }
   
   .dashboard-wrapper {
@@ -2848,4 +2874,41 @@ textarea.form-control {
   .form-full { grid-column: span 1; }
   .about-badge { position: relative; bottom: 0; left: 0; margin-top: 20px; }
   .footer-top { grid-template-columns: 1fr; }
+
+  .auth-page-wrapper {
+    padding-top: calc(60px + 20px);
+    padding-bottom: 40px;
+  }
+
+  .auth-container {
+    margin: 0 8px;
+    border-radius: 8px;
+  }
+
+  .auth-form-side {
+    padding: 24px 16px;
+  }
+
+  .auth-form-side h2 {
+    font-size: 20px;
+  }
+
+  .auth-subtitle {
+    font-size: 13px;
+    margin-bottom: 20px;
+  }
+
+  .role-toggle-container {
+    margin-bottom: 16px;
+  }
+
+  .role-btn {
+    font-size: 11px;
+    padding: 8px 4px;
+  }
+
+  .back-home-btn {
+    font-size: 12px;
+    padding: 8px 16px;
+  }
 }
